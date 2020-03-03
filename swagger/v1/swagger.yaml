@@ -1,0 +1,152 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+basePath: "/api/v1"
+servers:
+- url: "/api/v1"
+  description: developemnt
+paths:
+  "/tickets":
+    post:
+      summary: Create a ticket
+      tags:
+      - Tickets
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: ticket
+        in: body
+        schema:
+          type: object
+          properties: {}
+      responses:
+        '201':
+          description: blog created
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              request_number:
+                type: string
+              sequence_number:
+                type: string
+              request_type:
+                type: string
+              response_due_date_time:
+                type: string
+                format: date-time
+              primary_service_area_code:
+                type: string
+              additional_service_area_codes:
+                type: array
+                items:
+                  type: string
+              well_known_text:
+                type: string
+              created_at:
+                type: string
+                format: date-time
+              updated_at:
+                type: string
+                format: date-time
+              excavator:
+                type: object
+                properties:
+                  company_name:
+                    type: string
+                  full_address:
+                    type: string
+                  crew_onsite:
+                    type: boolean
+                  ticket_id:
+                    type: integer
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                required:
+                - company_name
+                - full_address
+                - crew_onsite
+                - ticket_id
+                - created_at
+                - updated_at
+            required:
+            - id
+            - request_number
+            - sequence_number
+            - request_type
+            - response_due_date_time
+            - primary_service_area_code
+            - additional_service_area_codes
+            - well_known_text
+            - created_at
+            - updated_at
+          examples:
+            application/json:
+              id: 28
+              request_number: '09252012-00001'
+              sequence_number: '2421'
+              request_type: Normal
+              response_due_date_time: '2011-07-13T23:59:59.000Z'
+              primary_service_area_code: ZZGL103
+              additional_service_area_codes:
+              - ZZL01
+              - ZZL02
+              - ZZL03
+              well_known_text: POLYGON((-81.13390268058475 32.07206917625161,-81.14660562247929
+                32.04064386441295,-81.08858407706913 32.02259853170128,-81.05322183341679
+                32.02434500961698,-81.05047525138554 32.042681017283066,-81.0319358226746
+                32.06537765335268,-81.01202310294804 32.078469305179404,-81.02850259513554
+                32.07963291684719,-81.07759774894413 32.07090546831167,-81.12154306144413
+                32.08806865844325,-81.13390268058475 32.07206917625161))
+              created_at: '2020-03-03T23:16:15.544Z'
+              updated_at: '2020-03-03T23:16:15.544Z'
+              excavator:
+                id: 28
+                company_name: John Doe CONSTRUCTION
+                full_address: 555 Some RD, SOME PARK, ZZ, 55555
+                crew_onsite: true
+                ticket_id: 28
+                created_at: '2020-03-03T23:16:15.548Z'
+                updated_at: '2020-03-03T23:16:15.548Z'
+        '422':
+          description: invalid request
+          schema:
+            type: object
+            properties:
+              errors:
+                type: object
+              required:
+              - errors
+          examples:
+            application/json:
+              errors:
+                request_number:
+                - can't be blank
+                sequence_number:
+                - can't be blank
+                request_type:
+                - can't be blank
+                response_due_date_time:
+                - can't be blank
+                - is not a valid datetime
+                primary_service_area_code:
+                - can't be blank
+                - is invalid
+                additional_service_area_codes:
+                - can't be blank
+                well_known_text:
+                - can't be blank
+                - is invalid
+                excavator.company_name:
+                - can't be blank
+                excavator.full_address:
+                - can't be blank
