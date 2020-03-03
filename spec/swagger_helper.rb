@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.configure do |config|
   # Specify a root folder where Swagger JSON files are generated
   # NOTE: If you're using the rswag-api to serve API descriptions, you'll need
@@ -19,7 +17,10 @@ RSpec.configure do |config|
         title: 'API V1',
         version: 'v1'
       },
-      paths: {}
+      basePath: '/api/v1',
+      servers: [
+        { url: '/api/v1', description: 'developemnt' }
+      ]
     }
   }
 
