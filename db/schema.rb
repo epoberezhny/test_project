@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_234240) do
+ActiveRecord::Schema.define(version: 2020_03_04_184444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2020_02_26_234240) do
     t.string "well_known_text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["request_number"], name: "index_tickets_on_request_number", unique: true
   end
 
   add_foreign_key "excavators", "tickets"

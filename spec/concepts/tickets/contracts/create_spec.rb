@@ -9,6 +9,12 @@ RSpec.describe Tickets::Contracts::Create, type: :model do
       it { is_expected.to allow_value('1' * 50).for(:request_number) }
       it { is_expected.not_to allow_value('123-a56').for(:request_number) }
       it { is_expected.not_to allow_value('1' * 51).for(:request_number) }
+
+      describe 'uniqueness' do
+        let(:ticket) { create(:ticket) }
+
+        it { is_expected.not_to allow_value(ticket.request_number).for(:request_number).with_message(:taken) }
+      end
     end
 
     describe 'sequence_number' do

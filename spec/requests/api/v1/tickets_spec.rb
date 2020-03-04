@@ -12,12 +12,9 @@ RSpec.describe 'Tickets' do
       tags 'Tickets'
       consumes 'application/json'
       produces 'application/json'
-      parameter name: :ticket, in: :body, schema: {
-        type: :object,
-        properties: {}
-      }
+      parameter name: :ticket, in: :body, schema: {}
 
-      response '201', 'blog created' do
+      response '201', 'Created' do
         schema type: :object,
           properties: {
             id: { type: :integer },
@@ -63,7 +60,7 @@ RSpec.describe 'Tickets' do
         run_test!
       end
 
-      response '422', 'invalid request' do
+      response '422', 'Unprocessable entity' do
         schema type: :object,
           properties: {
             errors: { type: :object },
