@@ -1,3 +1,5 @@
+require 'reform/form/validation/unique_validator'
+
 module Tickets
   module Contracts
     class Create < Reform::Form
@@ -8,10 +10,11 @@ module Tickets
       property :primary_service_area_code
       property :additional_service_area_codes
       property :well_known_text
-      property :excavator, populate_if_empty: Excavator, form: Tickets::Excavators::Contracts::Create
+      property :excavator,
+        populate_if_empty: Excavator, form: Tickets::Excavators::Contracts::Create, save: false
 
       with_options presence: true do
-        validates :request_number, format: { with: /\A[\d\-]{,50}\z/ }
+        validates :request_number, format: { with: /\A[\d\-]{,50}\z/ }, unique: true
         validates :sequence_number, format: { with: /\A\d{,50}\z/ }
         validates :request_type, length: { maximum: 50 }
         validates :response_due_date_time, timeliness: { type: :datetime }

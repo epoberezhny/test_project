@@ -6,7 +6,9 @@ module Tickets
       step :transform_keys_in_params
       step :extract_params
       step Contract::Validate(skip_extract: true)
-      step Contract::Persist()
+      step Rescue(ActiveRecord::RecordNotUnique) {
+        step Contract::Persist()
+      }
 
       def transform_keys_in_params(ctx, params:, **)
         ctx[:transformed_params] = params.deep_transform_keys { |key| key.to_s.underscore.to_sym }
