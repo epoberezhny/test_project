@@ -1,0 +1,17 @@
+%h1= t('.title')
+- if @model.length == 0
+  %p.text-center= t('.no_tickets')
+- else
+  %table#tickets.table.table-striped
+    %thead
+      %tr
+        %th= Ticket.human_attribute_name(:id)
+        %th= Ticket.human_attribute_name(:request_number)
+        %th= Ticket.human_attribute_name(:sequence_number)
+        %th= Ticket.human_attribute_name(:request_type)
+        %th= Ticket.human_attribute_name(:response_due_date_time)
+        %th= Ticket.human_attribute_name(:created_at)
+        %th= t('.actions')
+    %tbody
+      = render(@model)
+  != pagy_bootstrap_nav(@pagy)

@@ -1,5 +1,6 @@
 Rails.application.configure do
-  config.hosts << "lvh.me"
+  config.hosts << 'lvh.me'
+  config.action_view.raise_on_missing_translations = true
 
   # Settings specified here will take precedence over those in config/application.rb.
 
