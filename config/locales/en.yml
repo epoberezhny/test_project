@@ -4,5 +4,9 @@ en:
       title: Tickets index
       no_tickets: No tickets :(
       actions: Actions
+    show:
+      title: Tickets show
+      index: Tickets index
+      excavator: Excavator details
     ticket:
       show: Show
