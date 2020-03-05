@@ -64,8 +64,8 @@ RSpec.describe 'Tickets' do
         schema type: :object,
           properties: {
             errors: { type: :object },
-            required: %i[errors]
-          }
+          },
+          required: %i[errors]
 
         let(:ticket) { {} }
         run_test!
