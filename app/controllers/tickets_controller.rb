@@ -4,4 +4,14 @@ class TicketsController < ApplicationController
 
     @pagy = result[:pagy]
   end
+
+  def show
+    run Tickets::Operations::Show
+
+    if result.success?
+      @ticket = result[:model]
+    else
+      redirect_to action: :index
+    end
+  end
 end
